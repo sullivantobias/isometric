@@ -1,17 +1,25 @@
 import React from "react";
 
 import { DoubleSide } from "three";
+import { Plane } from "@react-three/drei";
 
 function Floor({ position, size }) {
   return (
     <>
       <gridHelper args={[...size, `red`, `black`]} />
 
-      <mesh position={position} rotation={[Math.PI / 2, 0, 0]}>
-        <planeBufferGeometry args={size} />
-
-        <meshBasicMaterial color="cyan" side={DoubleSide} />
-      </mesh>
+      <Plane
+        args={size}
+        receiveShadow
+        position={position}
+        rotation={[Math.PI / 2, 0, 0]}
+      >
+        <meshPhongMaterial
+          attach="material"
+          color="lightGreen"
+          side={DoubleSide}
+        />
+      </Plane>
     </>
   );
 }
