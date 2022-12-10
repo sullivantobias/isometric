@@ -3,7 +3,7 @@ import { CameraHelper } from "three";
 
 import { useHelper, PerspectiveCamera } from "@react-three/drei";
 
-function Camera({ positionis, isHelper }) {
+function Camera({ position, isHelper }) {
   const camera = useRef();
 
   useHelper(camera, CameraHelper, "cyan");
@@ -11,7 +11,7 @@ function Camera({ positionis, isHelper }) {
   return (
     <PerspectiveCamera
       ref={isHelper && camera}
-      position={[20, 20, 20]}
+      position={position}
       makeDefault
     />
   );

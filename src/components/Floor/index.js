@@ -3,16 +3,16 @@ import React from "react";
 import { DoubleSide } from "three";
 import { Plane } from "@react-three/drei";
 
-function Floor({ position, size }) {
+function Floor({ position, size, onClick, isHelper }) {
   return (
     <>
-      <gridHelper args={[...size, `red`, `black`]} />
-
+      {isHelper && <gridHelper args={[...size, `red`, `black`]} />}
       <Plane
         args={size}
         receiveShadow
         position={position}
         rotation={[Math.PI / 2, 0, 0]}
+        onClick={onClick}
       >
         <meshPhongMaterial
           attach="material"
