@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Box } from "@react-three/drei";
+import { Box, useTexture } from "@react-three/drei";
 
-function Picture({ position, onClick }) {
+const picture = "montage.jpeg";
+
+function Picture({ position }) {
+  const [isHovering, setIsHovering] = useState(false);
+  const texture = useTexture(picture);
+
   return (
-    <Box onClick={onClick} position={position} args={[0.2, 2, 2]}>
-      <meshPhongMaterial attach="material" color="red" />
+    <Box
+      onPointerEnter={() => setIsHovering(true)}
+      onPointerLeave={() => setIsHovering(false)}
+      position={position}
+      args={[0.2, 2, 2]}
+    >
+      <meshPhongMaterial
+        color={isHovering ? "red" : ""}
+        map={texture}
+        attach="material"
+      />
     </Box>
   );
 }
