@@ -8,18 +8,21 @@ function Picture({ position }) {
   const [isHovering, setIsHovering] = useState(false);
   const texture = useTexture(picture);
 
+  const handleHovering = (isHovering) => {
+    document.body.style.cursor = isHovering ? "pointer" : "auto";
+
+    setIsHovering(isHovering);
+  };
+
   return (
     <Box
-      onPointerEnter={() => setIsHovering(true)}
-      onPointerLeave={() => setIsHovering(false)}
+      onPointerOver={() => handleHovering(true)}
+      onPointerOut={() => handleHovering(false)}
       position={position}
       args={[0.2, 2, 2]}
+      scale={isHovering ? 1.2 : 1}
     >
-      <meshPhongMaterial
-        color={isHovering ? "red" : ""}
-        map={texture}
-        attach="material"
-      />
+      <meshPhongMaterial map={texture} attach="material" />
     </Box>
   );
 }
