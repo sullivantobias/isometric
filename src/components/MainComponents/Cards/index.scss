@@ -1,0 +1,19 @@
+.Cards {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .Card {
+    position: absolute;
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{3-$i}) {
+        margin-left: #{$i * 100}px;
+        margin-bottom: #{$i * 100}px;
+      }
+    }
+  }
+}

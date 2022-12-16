@@ -1,15 +1,18 @@
 import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Bounds, useBounds } from "@react-three/drei";
-import Floor from "./components/Floor";
-import Light from "./components/Light";
-import Camera from "./components/Camera";
-import Picture from "./components/PIcture";
-import ModelAvatar from "./components/ModelAvatar";
+import Floor from "./components/3DSceneComponents/Floor";
+import Light from "./components/3DSceneComponents/Light";
+import Camera from "./components/3DSceneComponents/Camera";
+import Picture from "./components/3DSceneComponents/Picture";
+import ModelAvatar from "./components/3DSceneComponents/ModelAvatar";
+import Grid from "./components/MainComponents/Grid";
+import Cards from "./components/MainComponents/Cards";
 
 import "./App.scss";
 
 function App() {
+  const [page, setPage] = useState(0);
   const [avatarPosition, setAvatarPosition] = useState([0, 0, 0]);
   const [avatarRotation, setAvatarRotation] = useState(0);
 
@@ -44,8 +47,8 @@ function App() {
     );
   };
 
-  return (
-    <div className="App">
+  const Page = () => {
+    const canvas = (
       <Canvas shadows>
         {/* camera and control */}
         <Camera position={[20, 20, 20]} />
@@ -66,8 +69,25 @@ function App() {
 
         <Floor onClick={(evt) => handleClickFloor(evt)} size={[20, 20, 20]} />
       </Canvas>
-    </div>
-  );
+    );
+
+    const mainPage = (
+      <div className="MainPage">
+        <Grid />
+        <Cards
+          cards={[
+            "images/mammouth.jpg",
+            "images/ampoules.jpg",
+            "images/mars.jpg",
+          ]}
+        />
+      </div>
+    );
+
+    return page === 1 ? canvas : mainPage;
+  };
+
+  return <div className="App">{Page()}</div>;
 }
 
 export default App;
