@@ -6,7 +6,7 @@ import { Vector3 } from "three";
 
 const picture = "montage.jpeg";
 
-function Picture({ position }) {
+function Picture({ position, rotation }) {
   const texture = useTexture(picture);
   const pictureRef = useRef();
 
@@ -29,7 +29,8 @@ function Picture({ position }) {
       onPointerOver={() => handleHovering(true)}
       onPointerOut={() => handleHovering(false)}
       position={position}
-      args={[0.2, 2, 2]}
+      rotation={rotation}
+      args={[0.2, 5, 5]}
       ref={pictureRef}
     >
       <meshPhongMaterial map={texture} attach="material" />
