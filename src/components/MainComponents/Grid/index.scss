@@ -1,3 +1,5 @@
+@import "../../../styles/colors.scss";
+
 $gridLine: 5px;
 
 .Grid {
@@ -10,13 +12,13 @@ $gridLine: 5px;
 
   .line {
     position: absolute;
-    background: #47af4d;
+    background: $green;
     -webkit-backface-visibility: hidden;
   }
 
   .dot {
     position: absolute;
-    background: white;
+    background: $white;
     width: $gridLine;
     height: $gridLine;
     top: 100%;

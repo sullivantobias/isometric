@@ -10,6 +10,7 @@ import Grid from "./components/MainComponents/Grid";
 import Cards from "./components/MainComponents/Cards";
 
 import "./App.scss";
+import Arrows from "./components/MainComponents/Arrows";
 
 function App() {
   const [page, setPage] = useState(0);
@@ -81,6 +82,7 @@ function App() {
             "images/mars.jpg",
           ]}
         />
+        <Arrows />
       </div>
     );
 

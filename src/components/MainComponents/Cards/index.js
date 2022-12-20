@@ -6,7 +6,7 @@ function Cards({ cards }) {
   return (
     <div className="Cards">
       {cards.map((src) => (
-        <Card src={src} />
+        <Card key={src} src={src} />
       ))}
     </div>
   );
