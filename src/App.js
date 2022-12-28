@@ -8,9 +8,10 @@ import Picture from "./components/3DSceneComponents/Picture";
 import ModelAvatar from "./components/3DSceneComponents/ModelAvatar";
 import Grid from "./components/MainComponents/Grid";
 import Cards from "./components/MainComponents/Cards";
+import Arrows from "./components/MainComponents/Arrows";
+import Hat from "./components/3DSceneComponents/Hat";
 
 import "./App.scss";
-import Arrows from "./components/MainComponents/Arrows";
 
 function App() {
   const [page, setPage] = useState(0);
@@ -69,6 +70,8 @@ function App() {
         </Suspense>
 
         <Floor onClick={(evt) => handleClickFloor(evt)} size={[20, 20, 20]} />
+
+        <Hat position={[0, 7, 0]} />
       </Canvas>
     );
 
