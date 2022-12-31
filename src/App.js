@@ -1,6 +1,8 @@
 import { useState, Suspense } from "react";
+
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Bounds, useBounds } from "@react-three/drei";
+
 import Floor from "./components/3DSceneComponents/Floor";
 import Light from "./components/3DSceneComponents/Light";
 import Camera from "./components/3DSceneComponents/Camera";
@@ -9,9 +11,10 @@ import ModelAvatar from "./components/3DSceneComponents/ModelAvatar";
 import Cards from "./components/MainComponents/Cards";
 import Arrows from "./components/MainComponents/Arrows";
 import Section from "./components/MainComponents/Section";
+import Scene from "./components/3DSceneComponents/Scene";
+import Timeline from "./components/MainComponents/Timeline";
 
 import "./App.scss";
-import Scene from "./components/3DSceneComponents/Scene";
 
 const SECTIONS = [
   {
@@ -26,10 +29,12 @@ const SECTIONS = [
       />
     ),
     anchorTarget: `#1`,
+    timeLineTarget: `#0`,
   },
   {
     title: "3D gallery view",
     anchorTarget: `#2`,
+    timeLineTarget: `#1`,
     isButton: true,
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
@@ -37,6 +42,7 @@ const SECTIONS = [
   {
     title: "Global gallery view",
     anchorTarget: `#0`,
+    timeLineTarget: `#2`,
     isButton: true,
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
@@ -109,6 +115,8 @@ function App() {
 
     const mainPage = (
       <div className="MainPage">
+        <Timeline sections={SECTIONS} />
+
         {SECTIONS.map(
           ({ title, children, anchorTarget, description, isButton }, index) => (
             <Section

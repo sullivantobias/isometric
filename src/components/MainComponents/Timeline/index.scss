@@ -1,0 +1,68 @@
+@import "../../../styles/colors.scss";
+
+.Timeline {
+  position: fixed;
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px;
+  top: 50px;
+  z-index: 2;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 6px;
+    width: 2px;
+    height: 100%;
+    background: $green;
+  }
+
+  &__block {
+    display: flex;
+
+    &:first-child {
+      align-items: flex-start;
+    }
+
+    &:last-child {
+      align-items: flex-end;
+    }
+
+    &.is-active {
+      .Timeline__marker {
+        background: $orange;
+      }
+
+      .Timeline__content {
+        a {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &__marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid $green;
+    background: $black;
+    z-index: 1;
+
+    transition: background 500ms;
+  }
+
+  &__content {
+    width: 100%;
+    padding-right: 15px;
+
+    a {
+      color: $grey;
+
+      transition: color 500ms;
+    }
+  }
+}
