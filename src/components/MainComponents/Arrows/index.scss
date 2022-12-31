@@ -7,6 +7,10 @@
   justify-content: center;
   cursor: pointer;
 
+  &.is-revert {
+    transform: rotate(180deg);
+  }
+
   :nth-child(1) {
     -webkit-animation: arrowAnimation1 1s infinite alternate;
     animation: arrowAnimation1 1s infinite alternate;

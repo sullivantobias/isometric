@@ -1,0 +1,35 @@
+@import "../../../styles/colors.scss";
+
+.Section {
+  display: flex;
+  height: 1000px;
+  flex-direction: column;
+  position: relative;
+
+  &__info {
+    top: 250px;
+    position: absolute;
+    left: 100px;
+  }
+
+  &__title {
+    letter-spacing: 2px;
+    color: $white;
+    text-transform: uppercase;
+    width: 400px;
+    margin-bottom: 30px;
+  }
+
+  &__description {
+    color: $white;
+    width: 400px;
+    letter-spacing: 2px;
+  }
+
+  &__children {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}

@@ -1,24 +1,17 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 function Hat(props) {
-  const group = useRef();
-  const { nodes, materials } = useGLTF("/hat.glb");
+  const { nodes, materials } = useGLTF("/vase.glb");
 
   return (
-    <group ref={group} {...props} dispose={null}>
-      <mesh
-        material={materials["CHAPEAU NOIR"]}
-        geometry={nodes.Cylinder_1.geometry}
-      />
-      <mesh
-        material={materials["LIGNE ROUGE"]}
-        geometry={nodes.Cylinder_2.geometry}
-      />
-    </group>
+    <mesh
+      material={materials["Material.001"]}
+      geometry={nodes.Cylinder.geometry}
+    />
   );
 }
 
-useGLTF.preload("/hat.glb");
+useGLTF.preload("/vase.glb");
 
 export default Hat;

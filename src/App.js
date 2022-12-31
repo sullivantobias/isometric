@@ -6,23 +6,53 @@ import Light from "./components/3DSceneComponents/Light";
 import Camera from "./components/3DSceneComponents/Camera";
 import Picture from "./components/3DSceneComponents/Picture";
 import ModelAvatar from "./components/3DSceneComponents/ModelAvatar";
-import Grid from "./components/MainComponents/Grid";
 import Cards from "./components/MainComponents/Cards";
 import Arrows from "./components/MainComponents/Arrows";
-import Hat from "./components/3DSceneComponents/Hat";
+import Section from "./components/MainComponents/Section";
 
 import "./App.scss";
+import Scene from "./components/3DSceneComponents/Scene";
+
+const SECTIONS = [
+  {
+    title: "Compositing Gallery",
+    children: (
+      <Cards
+        cards={[
+          "images/mammouth.jpg",
+          "images/ampoules.jpg",
+          "images/mars.jpg",
+        ]}
+      />
+    ),
+    anchorTarget: `#1`,
+  },
+  {
+    title: "3D gallery view",
+    anchorTarget: `#2`,
+    isButton: true,
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+  },
+  {
+    title: "Global gallery view",
+    anchorTarget: `#0`,
+    isButton: true,
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+  },
+];
 
 function App() {
   const [page, setPage] = useState(0);
-  const [avatarPosition, setAvatarPosition] = useState([0, 0, 0]);
+  const [avatarPosition, setAvatarPosition] = useState([0, 2, 0]);
   const [avatarRotation, setAvatarRotation] = useState(0);
 
   const handleClickFloor = (evt) =>
     setAvatarPosition([evt.point.x, 0, evt.point.z]);
 
   const handleAvatarMovements = (evt) => {
-    setAvatarPosition([evt.object.position.x + 2, 0, 0]);
+    setAvatarPosition([evt.object.position.x + 2, 2, 0]);
     setAvatarRotation(4.5);
   };
 
@@ -71,21 +101,29 @@ function App() {
 
         <Floor onClick={(evt) => handleClickFloor(evt)} size={[20, 20, 20]} />
 
-        <Hat position={[0, 7, 0]} />
+        <Scene />
       </Canvas>
     );
 
+    const onClickHandler = () => setPage(1);
+
     const mainPage = (
       <div className="MainPage">
-        <Grid />
-        <Cards
-          cards={[
-            "images/mammouth.jpg",
-            "images/ampoules.jpg",
-            "images/mars.jpg",
-          ]}
-        />
-        <Arrows />
+        {SECTIONS.map(
+          ({ title, children, anchorTarget, description, isButton }, index) => (
+            <Section
+              key={index}
+              onClick={onClickHandler}
+              isButton={isButton}
+              description={description}
+              id={index}
+              title={title}
+            >
+              {children}
+              <Arrows revert={index === 2} anchor={anchorTarget} />
+            </Section>
+          )
+        )}
       </div>
     );
 
