@@ -1,11 +1,13 @@
 import Button from "../Atoms/Button";
+import Title from "../Atoms/Title";
+
 import "./index.scss";
 
 function Section({ children, id, title, description, isButton, onClick }) {
   return (
     <div id={id} className="Section">
       <div className="Section__info">
-        <h1 className="Section__title">{title}</h1>
+        <Title title={title} className="Section__title" />
         <p className="Section__description">{description}</p>
         {isButton && <Button onClick={onClick} text={"Enter"} />}
       </div>

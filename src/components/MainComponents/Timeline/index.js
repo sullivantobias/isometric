@@ -30,9 +30,7 @@ function Timeline({ sections, onClick }) {
           })}
         >
           <div className="Timeline__content">
-            <a onClick={() => onClick(timeLineTarget)} href={timeLineTarget}>
-              {title}
-            </a>
+            <a href={timeLineTarget}>{title}</a>
           </div>
           <div className="Timeline__marker"></div>
         </div>

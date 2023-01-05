@@ -23,6 +23,14 @@
   &__block {
     display: flex;
 
+    &:hover {
+      .Timeline__content {
+        a {
+          color: $white;
+        }
+      }
+    }
+
     &:first-child {
       align-items: flex-start;
     }

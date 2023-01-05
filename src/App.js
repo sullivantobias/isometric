@@ -1,7 +1,17 @@
-import { useState, Suspense } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
+
+import { confParticles } from "./configParticles";
 
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Bounds, useBounds } from "@react-three/drei";
+
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+
+import useSound from "use-sound";
+
+import MainTheme from "./sounds/main.mp3";
+import ClickSound from "./sounds/click.mp3";
 
 import Floor from "./components/3DSceneComponents/Floor";
 import Light from "./components/3DSceneComponents/Light";
@@ -53,6 +63,10 @@ function App() {
   const [page, setPage] = useState(0);
   const [avatarPosition, setAvatarPosition] = useState([0, 2, 0]);
   const [avatarRotation, setAvatarRotation] = useState(0);
+
+  const particlesInit = useCallback(async (engine) => {
+    await loadFull(engine);
+  }, []);
 
   const handleClickFloor = (evt) =>
     setAvatarPosition([evt.point.x, 0, evt.point.z]);
@@ -111,12 +125,21 @@ function App() {
       </Canvas>
     );
 
-    const onClickHandler = () => setPage(1);
+    const [playMainTheme] = useSound(MainTheme, { volume: 0.2 });
+    const [playClickSound] = useSound(ClickSound, { volume: 0.4 });
+
+    const onClickHandler = () => {
+      playClickSound();
+      setPage(1);
+    };
+
+    useEffect(() => playMainTheme());
 
     const mainPage = (
       <div className="MainPage">
-        <Timeline sections={SECTIONS} />
+        <Particles init={particlesInit} options={confParticles} />
 
+        <Timeline sections={SECTIONS} />
         {SECTIONS.map(
           ({ title, children, anchorTarget, description, isButton }, index) => (
             <Section
