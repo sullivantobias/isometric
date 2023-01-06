@@ -2,11 +2,11 @@ import Card from "../Card";
 
 import "./index.scss";
 
-function Cards({ cards }) {
+function Cards({ cards, mouseClient }) {
   return (
     <div className="Cards">
       {cards.map((src) => (
-        <Card key={src} src={src} />
+        <Card mouseClient={mouseClient} key={src} src={src} />
       ))}
     </div>
   );

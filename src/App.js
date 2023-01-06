@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, Suspense } from "react";
+import { useState, useCallback, Suspense } from "react";
 
-import { confParticles } from "./configParticles";
+import { UilVolume, UilVolumeMute } from "@iconscout/react-unicons";
 
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Bounds, useBounds } from "@react-three/drei";
@@ -9,6 +9,8 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 import useSound from "use-sound";
+
+import { confParticles } from "./configParticles";
 
 import MainTheme from "./sounds/main.mp3";
 import ClickSound from "./sounds/click.mp3";
@@ -23,14 +25,16 @@ import Arrows from "./components/MainComponents/Arrows";
 import Section from "./components/MainComponents/Section";
 import Scene from "./components/3DSceneComponents/Scene";
 import Timeline from "./components/MainComponents/Timeline";
+import Icon from "./components/MainComponents/Icon";
 
 import "./App.scss";
 
 const SECTIONS = [
   {
     title: "Compositing Gallery",
-    children: (
+    children: (mouseClient) => (
       <Cards
+        mouseClient={mouseClient}
         cards={[
           "images/mammouth.jpg",
           "images/ampoules.jpg",
@@ -63,6 +67,33 @@ function App() {
   const [page, setPage] = useState(0);
   const [avatarPosition, setAvatarPosition] = useState([0, 2, 0]);
   const [avatarRotation, setAvatarRotation] = useState(0);
+
+  const windowWidth = window.innerWidth / 5;
+  const windowHeight = window.innerHeight / 5;
+
+  const [mouseClient, setMouseClient] = useState({});
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const [playMainTheme, { pause }] = useSound(MainTheme, {
+    volume: 0.2,
+  });
+
+  const [playClickSound] = useSound(ClickSound, { volume: 0.4 });
+
+  const handleHoverEffect = (e) => {
+    setMouseClient({ x: e.clientX / windowWidth, y: e.clientY / windowHeight });
+  };
+
+  const onClickHandler = () => {
+    playClickSound();
+    setPage(1);
+  };
+
+  const togglePlayingMainTheme = () => {
+    isPlaying ? pause() : playMainTheme();
+    setIsPlaying((prev) => !prev);
+  };
 
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
@@ -125,37 +156,38 @@ function App() {
       </Canvas>
     );
 
-    const [playMainTheme] = useSound(MainTheme, { volume: 0.2 });
-    const [playClickSound] = useSound(ClickSound, { volume: 0.4 });
-
-    const onClickHandler = () => {
-      playClickSound();
-      setPage(1);
-    };
-
-    useEffect(() => playMainTheme());
-
     const mainPage = (
-      <div className="MainPage">
+      <>
         <Particles init={particlesInit} options={confParticles} />
 
-        <Timeline sections={SECTIONS} />
-        {SECTIONS.map(
-          ({ title, children, anchorTarget, description, isButton }, index) => (
-            <Section
-              key={index}
-              onClick={onClickHandler}
-              isButton={isButton}
-              description={description}
-              id={index}
-              title={title}
-            >
-              {children}
-              <Arrows revert={index === 2} anchor={anchorTarget} />
-            </Section>
-          )
-        )}
-      </div>
+        <div className="MainPage" onMouseMove={(e) => handleHoverEffect(e)}>
+          <Icon
+            onClick={togglePlayingMainTheme}
+            className="SoundIcon"
+            iconElement={isPlaying ? <UilVolume /> : <UilVolumeMute />}
+          />
+
+          <Timeline sections={SECTIONS} />
+          {SECTIONS.map(
+            (
+              { title, children, anchorTarget, description, isButton },
+              index
+            ) => (
+              <Section
+                key={index}
+                onClick={onClickHandler}
+                isButton={isButton}
+                description={description}
+                id={index}
+                title={title}
+              >
+                {children && children(mouseClient)}
+                <Arrows revert={index === 2} anchor={anchorTarget} />
+              </Section>
+            )
+          )}
+        </div>
+      </>
     );
 
     return page === 1 ? canvas : mainPage;
