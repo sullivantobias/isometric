@@ -1,11 +1,18 @@
+@import "../../../styles/breakpoints.scss";
+
 .Arrows {
   position: absolute;
-  bottom: 50px;
+
+  bottom: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  @include medium {
+    bottom: 50px;
+  }
 
   &.is-revert {
     transform: rotate(180deg);

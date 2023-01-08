@@ -1,12 +1,19 @@
-.Card {
-  height: 300px;
-  width: 500px;
-  opacity: 0.8;
-  transition: 500ms;
+@import "../../../styles/breakpoints.scss";
 
-  &:hover {
-    filter: grayscale(100%);
-    opacity: 1;
+.Card {
+  height: 150px;
+  width: 250px;
+
+  @include medium {
+    height: 300px;
+    width: 500px;
+    opacity: 0.8;
+    transition: 500ms;
+
+    &:hover {
+      filter: grayscale(100%);
+      opacity: 1;
+    }
   }
 
   img {

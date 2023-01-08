@@ -81,8 +81,14 @@ function App() {
 
   const [playClickSound] = useSound(ClickSound, { volume: 0.4 });
 
+  const isSmallDevice = window.innerWidth < 1024;
+
   const handleHoverEffect = (e) => {
-    setMouseClient({ x: e.clientX / windowWidth, y: e.clientY / windowHeight });
+    !isSmallDevice &&
+      setMouseClient({
+        x: e.clientX / windowWidth,
+        y: e.clientY / windowHeight,
+      });
   };
 
   const onClickHandler = () => {

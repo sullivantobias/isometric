@@ -1,15 +1,23 @@
 @import "../../../styles/colors.scss";
+@import "../../../styles/breakpoints.scss";
 
 .Section {
   display: flex;
   height: 1000px;
   flex-direction: column;
   position: relative;
+  align-items: center;
 
   &__info {
-    top: 250px;
     position: absolute;
-    left: 100px;
+    top: 300px;
+    text-align: center;
+
+    @include medium {
+      top: 250px;
+      left: 100px;
+      text-align: start;
+    }
   }
 
   &__title {
@@ -24,6 +32,12 @@
     color: $white;
     width: 400px;
     letter-spacing: 2px;
+    padding: 0 30px;
+    text-align: justify;
+
+    @include medium {
+      padding: 0;
+    }
   }
 
   &__children {

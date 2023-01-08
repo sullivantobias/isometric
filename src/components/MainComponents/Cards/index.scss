@@ -1,3 +1,5 @@
+@import "../../../styles/breakpoints.scss";
+
 .Cards {
   position: relative;
   display: flex;
@@ -9,8 +11,13 @@
 
     @for $i from 1 through 3 {
       &:nth-child(#{3-$i}) {
-        margin-left: #{$i * 100}px;
-        margin-bottom: #{$i * 100}px;
+        margin-left: #{$i * 20}px;
+        margin-bottom: #{$i * 20}px;
+
+        @include medium {
+          margin-left: #{$i * 100}px;
+          margin-bottom: #{$i * 100}px;
+        }
       }
     }
   }
