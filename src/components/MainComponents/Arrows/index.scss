@@ -1,48 +1,25 @@
 @import "../../../styles/breakpoints.scss";
 
 .Arrows {
-  position: absolute;
-
-  bottom: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  bottom: 100px;
   cursor: pointer;
 
-  @include medium {
-    bottom: 50px;
+  .Icon {
+    &:nth-child(1) {
+      width: 60px;
+    }
+
+    &:nth-child(2) {
+      width: 80px;
+    }
   }
 
   &.is-revert {
     transform: rotate(180deg);
-  }
-
-  :nth-child(1) {
-    -webkit-animation: arrowAnimation1 1s infinite alternate;
-    animation: arrowAnimation1 1s infinite alternate;
-  }
-
-  :nth-child(2) {
-    -webkit-animation: arrowAnimation2 1s infinite alternate;
-    animation: arrowAnimation2 1s infinite alternate;
-  }
-}
-
-@keyframes arrowAnimation1 {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-25px);
-  }
-}
-
-@keyframes arrowAnimation2 {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-30px);
   }
 }

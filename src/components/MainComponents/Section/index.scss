@@ -3,19 +3,15 @@
 
 .Section {
   display: flex;
-  height: 1000px;
-  flex-direction: column;
+  height: 100vh;
   position: relative;
   align-items: center;
+  justify-content: center;
 
   &__info {
-    position: absolute;
-    top: 300px;
     text-align: center;
 
     @include medium {
-      top: 250px;
-      left: 100px;
       text-align: start;
     }
   }
@@ -42,8 +38,14 @@
 
   &__children {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  }
+
+  &__rightSection {
+    justify-content: space-evenly;
+
+    .Section__children {
+      height: 300px;
+      width: 500px;
+    }
   }
 }

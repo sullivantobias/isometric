@@ -1,11 +1,13 @@
+import { forwardRef } from "react";
+
 import "./index.scss";
 
-function Button({ text, onClick }) {
-  return (
+const Button = forwardRef(({ text, onClick }, ref) => (
+  <div ref={ref}>
     <button onClick={onClick} className="Button">
       {text}
     </button>
-  );
-}
+  </div>
+));
 
 export default Button;

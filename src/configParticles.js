@@ -4,7 +4,7 @@ export const confParticles = {
       value: "000",
     },
   },
-  fpsLimit: 120,
+  fpsLimit: 60,
   interactivity: {
     events: {
       onHover: {
@@ -44,16 +44,16 @@ export const confParticles = {
     number: {
       density: {
         enable: true,
-        area: 1000,
+        area: 1200,
       },
-      value: 90,
+      value: 60,
     },
     opacity: {
       value: 0.2,
     },
 
     size: {
-      value: { min: 1, max: 5 },
+      value: { min: 1, max: 4 },
     },
   },
   detectRetina: true,

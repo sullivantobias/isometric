@@ -20,32 +20,25 @@ import Light from "./components/3DSceneComponents/Light";
 import Camera from "./components/3DSceneComponents/Camera";
 import Picture from "./components/3DSceneComponents/Picture";
 import ModelAvatar from "./components/3DSceneComponents/ModelAvatar";
-import Cards from "./components/MainComponents/Cards";
 import Arrows from "./components/MainComponents/Arrows";
 import Section from "./components/MainComponents/Section";
 import Scene from "./components/3DSceneComponents/Scene";
 import Timeline from "./components/MainComponents/Timeline";
 import Icon from "./components/MainComponents/Icon";
+import MouseTrail from "./components/MainComponents/utils/gsap/MouseTrail";
 
 import "./App.scss";
 
 const SECTIONS = [
   {
     title: "Compositing Gallery",
-    children: (mouseClient) => (
-      <Cards
-        mouseClient={mouseClient}
-        cards={[
-          "images/mammouth.jpg",
-          "images/ampoules.jpg",
-          "images/mars.jpg",
-        ]}
-      />
-    ),
+
     anchorTarget: `#1`,
     timeLineTarget: `#0`,
   },
   {
+    children: () => <img className="hoverable" src="images/mars.jpg" alt="" />,
+    isRightSection: true,
     title: "3D gallery view",
     anchorTarget: `#2`,
     timeLineTarget: `#1`,
@@ -54,6 +47,8 @@ const SECTIONS = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
   },
   {
+    children: () => <img className="hoverable" src="images/mars.jpg" alt="" />,
+    isRightSection: true,
     title: "Global gallery view",
     anchorTarget: `#0`,
     timeLineTarget: `#2`,
@@ -68,11 +63,6 @@ function App() {
   const [avatarPosition, setAvatarPosition] = useState([0, 2, 0]);
   const [avatarRotation, setAvatarRotation] = useState(0);
 
-  const windowWidth = window.innerWidth / 5;
-  const windowHeight = window.innerHeight / 5;
-
-  const [mouseClient, setMouseClient] = useState({});
-
   const [isPlaying, setIsPlaying] = useState(false);
 
   const [playMainTheme, { pause }] = useSound(MainTheme, {
@@ -80,16 +70,6 @@ function App() {
   });
 
   const [playClickSound] = useSound(ClickSound, { volume: 0.4 });
-
-  const isSmallDevice = window.innerWidth < 1024;
-
-  const handleHoverEffect = (e) => {
-    !isSmallDevice &&
-      setMouseClient({
-        x: e.clientX / windowWidth,
-        y: e.clientY / windowHeight,
-      });
-  };
 
   const onClickHandler = () => {
     playClickSound();
@@ -164,9 +144,10 @@ function App() {
 
     const mainPage = (
       <>
-        <Particles init={particlesInit} options={confParticles} />
+        {<Particles init={particlesInit} options={confParticles} />}
+        <MouseTrail />
 
-        <div className="MainPage" onMouseMove={(e) => handleHoverEffect(e)}>
+        <div className="MainPage">
           <Icon
             onClick={togglePlayingMainTheme}
             className="SoundIcon"
@@ -176,7 +157,14 @@ function App() {
           <Timeline sections={SECTIONS} />
           {SECTIONS.map(
             (
-              { title, children, anchorTarget, description, isButton },
+              {
+                title,
+                children,
+                anchorTarget,
+                description,
+                isButton,
+                isRightSection,
+              },
               index
             ) => (
               <Section
@@ -186,9 +174,10 @@ function App() {
                 description={description}
                 id={index}
                 title={title}
+                isRightSection={isRightSection}
+                arrows={<Arrows revert={index === 2} anchor={anchorTarget} />}
               >
-                {children && children(mouseClient)}
-                <Arrows revert={index === 2} anchor={anchorTarget} />
+                {children && children()}
               </Section>
             )
           )}

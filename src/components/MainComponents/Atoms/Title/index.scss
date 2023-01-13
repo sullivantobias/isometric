@@ -2,25 +2,4 @@
 @import "../../../../styles/breakpoints.scss";
 
 .Title {
-  @include medium {
-    &::after {
-      content: "";
-      display: block;
-      height: 5%;
-      width: calc(100% - 300px);
-      opacity: 0.4;
-      position: absolute;
-      background: $green;
-      top: 40px;
-      left: -1px;
-      padding: 10px 3px 3px 10px;
-      transition: all 500ms;
-    }
-
-    &:hover {
-      &::after {
-        width: 80%;
-      }
-    }
-  }
 }

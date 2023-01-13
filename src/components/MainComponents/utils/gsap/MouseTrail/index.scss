@@ -1,0 +1,26 @@
+@import "../../../../../styles/colors.scss";
+
+.Cursor {
+  pointer-events: none;
+
+  &__ball {
+    position: fixed;
+    top: 0;
+    left: 0;
+    mix-blend-mode: difference;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    circle {
+      fill: $orange;
+    }
+  }
+
+  &__text {
+    position: absolute;
+    font-size: 8px;
+    opacity: 0;
+  }
+}
