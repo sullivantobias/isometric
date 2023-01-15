@@ -12,7 +12,7 @@
     text-align: center;
 
     @include medium {
-      text-align: start;
+      text-align: center;
     }
   }
 
@@ -46,6 +46,10 @@
     .Section__children {
       height: 300px;
       width: 500px;
+    }
+
+    .Section__info {
+      text-align: start;
     }
   }
 }

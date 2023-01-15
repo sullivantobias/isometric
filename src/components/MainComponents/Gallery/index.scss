@@ -1,0 +1,42 @@
+@import "../../../styles/colors.scss";
+
+.Gallery {
+  &__wrapper {
+    overflow-x: hidden;
+  }
+
+  &__section:not(.last) {
+    padding-bottom: 1rem;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    text-transform: uppercase;
+    overflow: visible;
+  }
+
+  &__text {
+    .text {
+      font-size: 16rem;
+      line-height: 1;
+      color: $white;
+      white-space: nowrap;
+    }
+  }
+
+  li {
+    flex-shrink: 0;
+    width: clamp(300px, 60vw, 500px);
+    margin-right: 1rem;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+      filter: grayscale(80%);
+      opacity: 0.6;
+    }
+  }
+}

@@ -26,6 +26,7 @@ import Scene from "./components/3DSceneComponents/Scene";
 import Timeline from "./components/MainComponents/Timeline";
 import Icon from "./components/MainComponents/Icon";
 import MouseTrail from "./components/MainComponents/utils/gsap/MouseTrail";
+import Gallery from "./components/MainComponents/Gallery";
 
 import "./App.scss";
 
@@ -155,6 +156,7 @@ function App() {
           />
 
           <Timeline sections={SECTIONS} />
+
           {SECTIONS.map(
             (
               {
@@ -167,18 +169,21 @@ function App() {
               },
               index
             ) => (
-              <Section
-                key={index}
-                onClick={onClickHandler}
-                isButton={isButton}
-                description={description}
-                id={index}
-                title={title}
-                isRightSection={isRightSection}
-                arrows={<Arrows revert={index === 2} anchor={anchorTarget} />}
-              >
-                {children && children()}
-              </Section>
+              <>
+                <Section
+                  key={index}
+                  onClick={onClickHandler}
+                  isButton={isButton}
+                  description={description}
+                  id={index}
+                  title={title}
+                  isRightSection={isRightSection}
+                  arrows={<Arrows revert={index === 2} anchor={anchorTarget} />}
+                >
+                  {children && children()}
+                </Section>
+                {index === 0 && <Gallery />}
+              </>
             )
           )}
         </div>
