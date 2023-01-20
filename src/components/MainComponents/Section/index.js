@@ -24,15 +24,10 @@ function Section({
   const buttonRef = useRef(null);
   const childrenRef = useRef(null);
 
-  const effect = [
-    {
-      x: -200,
-      opacity: 0,
-    },
-    {
-      x: 0,
-    },
-  ];
+  const effect = {
+    x: -200,
+    opacity: 0,
+  };
 
   useLayoutEffect(() => {
     const timeline = gsap.timeline({
@@ -46,22 +41,27 @@ function Section({
       },
     });
 
-    isRightSection &&
-      timeline
-        .fromTo(titleRef.current, ...effect)
-        .fromTo(
-          childrenRef.current,
-          {
-            x: 200,
-            opacity: 0,
-          },
-          {
-            x: 0,
-          },
-          "<"
-        )
-        .fromTo(descRef.current, ...effect, 0.4)
-        .fromTo(buttonRef.current, ...effect, 0.5);
+    const noRightSectionTimeline = gsap.timeline({
+      defaults: { duration: 1.5 },
+    });
+
+    isRightSection
+      ? timeline
+          .from(titleRef.current, effect)
+          .from(
+            childrenRef.current,
+            {
+              y: 200,
+              opacity: 0,
+            },
+            "<"
+          )
+          .from(descRef.current, effect, 0.4)
+          .from(buttonRef.current, effect, 0.5)
+      : noRightSectionTimeline.from("h1", {
+          y: 100,
+          ease: "power4.easeOut",
+        });
   }, []);
 
   return (

@@ -25,11 +25,14 @@
     }
   }
 
+  ul {
+    gap: 20px;
+  }
+
   li {
     flex-shrink: 0;
     width: clamp(300px, 60vw, 500px);
-    margin-right: 1rem;
-    height: 200px;
+    height: 300px;
     overflow: hidden;
 
     img {

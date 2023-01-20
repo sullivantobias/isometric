@@ -23,24 +23,29 @@ import ModelAvatar from "./components/3DSceneComponents/ModelAvatar";
 import Arrows from "./components/MainComponents/Arrows";
 import Section from "./components/MainComponents/Section";
 import Scene from "./components/3DSceneComponents/Scene";
-import Timeline from "./components/MainComponents/Timeline";
 import Icon from "./components/MainComponents/Icon";
 import MouseTrail from "./components/MainComponents/utils/gsap/MouseTrail";
 import Gallery from "./components/MainComponents/Gallery";
+import Header from "./components/MainComponents/Structures/Header";
 
 import "./App.scss";
+import MovableImage from "./components/MainComponents/utils/gsap/MouvableIMage";
 
 const SECTIONS = [
   {
-    title: "Compositing Gallery",
+    title: "Gallery",
 
     anchorTarget: `#1`,
     timeLineTarget: `#0`,
   },
   {
-    children: () => <img className="hoverable" src="images/mars.jpg" alt="" />,
+    children: () => (
+      <MovableImage>
+        <img className="hoverable" src="images/mars.jpg" alt="" />
+      </MovableImage>
+    ),
     isRightSection: true,
-    title: "3D gallery view",
+    title: "3D view",
     anchorTarget: `#2`,
     timeLineTarget: `#1`,
     isButton: true,
@@ -48,9 +53,13 @@ const SECTIONS = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
   },
   {
-    children: () => <img className="hoverable" src="images/mars.jpg" alt="" />,
+    children: () => (
+      <MovableImage>
+        <img className="hoverable" src="images/mammouth.jpg" alt="" />
+      </MovableImage>
+    ),
     isRightSection: true,
-    title: "Global gallery view",
+    title: "Global view",
     anchorTarget: `#0`,
     timeLineTarget: `#2`,
     isButton: true,
@@ -155,7 +164,7 @@ function App() {
             iconElement={isPlaying ? <UilVolume /> : <UilVolumeMute />}
           />
 
-          <Timeline sections={SECTIONS} />
+          <Header sections={SECTIONS} />
 
           {SECTIONS.map(
             (

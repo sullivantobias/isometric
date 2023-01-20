@@ -22,6 +22,15 @@
     text-transform: uppercase;
     width: 400px;
     margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    overflow-y: hidden;
+    position: relative;
+    height: 70px;
+
+    h1 {
+      position: absolute;
+    }
   }
 
   &__description {
@@ -46,6 +55,15 @@
     .Section__children {
       height: 300px;
       width: 500px;
+    }
+
+    .Section__title {
+      height: unset;
+      justify-content: flex-start;
+
+      h1 {
+        position: relative;
+      }
     }
 
     .Section__info {

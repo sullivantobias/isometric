@@ -3,48 +3,51 @@
 
 @include medium {
   .Timeline {
-    position: fixed;
-    right: 50px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 150px;
-    top: 50px;
     z-index: 2;
     text-transform: uppercase;
+    justify-content: space-between;
+    width: 600px;
 
     &:before {
       content: "";
       position: absolute;
-      top: 0;
-      right: 6px;
-      width: 2px;
-      height: 100%;
+      top: 33px;
+      width: 600px;
+      height: 2px;
       background: $green;
     }
 
     &__block {
       display: flex;
+      padding-top: 30px;
+      position: relative;
 
       &:hover {
         .Timeline__content {
           a {
-            color: $white;
+            color: $orange;
           }
         }
       }
 
       &:first-child {
-        align-items: flex-start;
+        justify-items: flex-start;
+
+        .Timeline__marker {
+          left: 0;
+        }
       }
 
-      &:last-child {
-        align-items: flex-end;
+      &:nth-child(2) {
+        .Timeline__marker {
+          left: 50%;
+        }
       }
 
       &.is-active {
         .Timeline__marker {
-          background: $white;
+          background: $orange;
         }
 
         .Timeline__content {
@@ -59,8 +62,11 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
+      position: absolute;
+      right: 0;
+      top: 0;
       border: 2px solid $green;
-      background: $black;
+      background: $white;
       z-index: 1;
 
       transition: background 500ms;
@@ -68,10 +74,9 @@
 
     &__content {
       width: 100%;
-      padding-right: 15px;
 
       a {
-        color: $grey;
+        color: $white;
 
         transition: color 500ms;
       }

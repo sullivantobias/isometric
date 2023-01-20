@@ -22,10 +22,11 @@
   .SoundIcon {
     position: fixed;
     left: 20px;
-    top: 20px;
+    top: 30px;
+    z-index: 11;
 
     svg {
-      fill: $white;
+      fill: $orange;
     }
   }
 }
